@@ -1,0 +1,46 @@
+.navbar-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-size: 20px;
+    border-bottom: 3px solid grey;
+    margin-bottom: 50px;
+}
+
+.logo{
+    font-size: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    color: black;
+    font-family: "Lucida Sans";
+}
+
+
+.navbar a{
+    text-decoration: none;
+    font-weight: 400;
+    color: black;
+    margin-left: 60px;
+    font-family: "Lucida Sans";    
+}
+
+.btn{
+    justify-content: space-between;
+    color: black;
+    margin-left: 30px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5000px;
+    font-weight: 700px;
+    font-family: "Lucida Sans";
+}
+
+.search-bar{
+    display:flex;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    justify-content: center;
+    
+}
