@@ -1,3 +1,4 @@
+<?php include 'webConfig.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,17 +32,19 @@
                 <option value="Recipies">
                 <option value="Ingredients">
             </datalist>
+            <input name="phrase" class="search-box"type="text">
+            <input name="submit" class="go" type="submit">
         </form>
-        <form class="search-box" placeholder="Search">
-            <input type="text">
-        </form>
-        <form class="go">
-            <input type="submit">
-        </form> 
-    </div>
-    <div class="search-results">
         
     </div>
+
+    <?php 
+        $phrase = $_POST['phrase'];
+        $namedb = $_POST['searchData'];
+    ?>   
+     <div class="search-results">
+                  
+     </div>
 </body>
 
 </html>
