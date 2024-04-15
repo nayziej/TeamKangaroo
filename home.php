@@ -38,12 +38,73 @@
         
     </div>
 
-    <?php 
-        $phrase = $_POST['phrase'];
-        $namedb = $_POST['searchData'];
+    <?php
+        if(isset($_POST['phrase'])){
+            $phrase = $_POST['phrase'];
+        }else{
+            $phrase = '';
+        }
+        
+        if(isset($_POST['searchData'])){ 
+            $namedb = $_POST['searchData'];
+        }else{
+            $namedb = '';
+        }
+
+
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        if(!$conn){
+            die("Connection Failed: " . mysqli_connect_error());
+        }
+        
+        if($namedb == 'Publishers'){
+            if($phrase == ''){
+                $sql = "SELECT * FROM user";
+            }else{
+                $sql = "SELECT * FROM user WHERE username LIKE '".$phrase."%'";
+            }
+
+            $results = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($results) > 0){
+                echo '<p style="display:flex; margin-top:50px; justify-content:center; ">Users:</p>';
+                while($row = mysqli_fetch_assoc($results)){
+                    echo '<div style="margin-right:auto; margin-left:auto; margin-top:20px; justify-content:center; display:flex; width:fit-content; border: 1px solid black; background-color:grey" width:50%;><p style="margin-right:20px;">'.$row["name"].'</p><p>'.$row["username"].'</p></div>';
+                }
+            }else{
+                echo "No results";
+            }
+        }else if($namedb == 'Recipies'){
+            if($phrase == ''){
+                $sql = "SELECT * FROM recipie";
+            }else{
+                $sql = "SELECT * FROM recipie WHERE title LIKE '".$phrase."%'";
+            }
+
+            $results = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($results) > 0){
+                echo '<p style="display:flex; margin-top:50px; justify-content:center;">Recipies</p>';
+
+                while($row = mysqli_fetch_assoc($results)){
+                    echo '<div style="margin-right:auto; margin-left:auto; margin-top:2    0px; justify-content:center; display:flex; width:fit-content; border: 1px solid black;     background-color:grey" width:50%;><p style="margin-right:20px;">'.$row["title"].'</p><p>    '.$row["calories"].'</p></div>';
+                }
+            }else{
+                echo 'No results';
+            }
+        }else if($namedb == 'Ingredients'){
+            if($phrase == ''){
+                $sql = "SELECT * FROM ingredient";
+            }else{
+                $sql = "SELECT * FROM ingredient WHERE name LIKE '".$phrase."%'";
+            }
+        }else{
+            $sql = "SELECT * FROM discussion";
+        }
+
+        
+        
     ?>   
      <div class="search-results">
-                  
+         <?php   ?>                 
      </div>
 </body>
 
