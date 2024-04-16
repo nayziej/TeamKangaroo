@@ -15,13 +15,13 @@
 
         <div class="navbar">
             <a href="home.php">Home</a>
-            <a href="">Publishers</a>
+            <a href="publishers.php">Publishers</a>
             <a href="recipie.php">Recipies</a>
-            <a href="">Profile</a>
+            <a href="profile.php">Profile</a>
         </div>
         <div class="ls-buttons">
-            <button class="btn" type="button" href="">Log In</button>
-            <button class="btn" type="button" href="">Sign Up</button>   
+            <button class="btn" type="button" href="login.php">Log In</button>
+            <button class="btn" type="button" href="signup.php">Sign Up</button>   
         </div>
     </div>
     <div class="search-bar">
