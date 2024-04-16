@@ -34,6 +34,7 @@
     border-radius: 5000px;
     font-weight: 700px;
     font-family: "Lucida Sans";
+    margin-top: 10px;
 }
 
 .search-bar{
@@ -44,3 +45,5 @@
     justify-content: center;
     margin-bottom:60px;
 }
+
+

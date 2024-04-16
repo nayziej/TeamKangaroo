@@ -15,13 +15,17 @@
 
         <div class="navbar">
             <a href="home.php">Home</a>
-            <a href="publishers.php">Publishers</a>
+            <a href="publisher.php">Publishers</a>
             <a href="recipie.php">Recipies</a>
             <a href="profile.php">Profile</a>
         </div>
         <div class="ls-buttons">
-            <button class="btn" type="button" href="login.php">Log In</button>
-            <button class="btn" type="button" href="signup.php">Sign Up</button>   
+            <form  style="float:left;"action="login.php">
+            <button class="btn" type="submit" href="login.php">Log In</button>
+            </form>
+            <form  style="float: left;"action="signup.php">
+            <button class="btn" type="submit" href="signup.php">Sign Up</button>
+            </form>   
         </div>
     </div>
     <div class="search-bar">
