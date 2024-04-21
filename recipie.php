@@ -20,8 +20,12 @@
             <a href="">Profile</a>
         </div>
         <div class="ls-buttons">
-            <button class="btn" type="button" href="">Log In</button>
-            <button class="btn" type="button" href="">Sign Up</button>
+            <form style="float:left;" action="login.php">
+                <button class="btn" type="submit" href="login.php">Log In</button>
+            </form>
+            <form style="float: left;" action="signup.php">
+                <button class="btn" type="submit" href="signup.php">Sign Up</button>
+            </form>
         </div>
     </div>
 
