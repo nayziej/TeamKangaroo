@@ -41,7 +41,7 @@
              $sql = "SELECT u.username, r.title, r.calories, r.servings, r.directions, r.carbs, r.fat from user as u inner join recipie as r ON u.id = r.user_id where r.id = ".$recipie."";
              $results = mysqli_query($conn, $sql);
              $row = mysqli_fetch_assoc($results);
-             echo "<p> ".$row['title']."</p><p>".$row['username']."</p><p>".$row['directions']."</p>"; 
+             echo "<h1> ".$row['title']."</h1><p> Made by: ".$row['username']."</p><p>Instructions: ".$row['directions']."</p>"; 
         }else{
             $conn = mysqli_connect($servername, $username, $password, $dbname);
             if(!$conn){
@@ -55,7 +55,9 @@
             if(mysqli_num_rows($results) > 0){
                 echo '<p style="display:flex; margin-top:50px; justify-content:center;">Recipies:</p>';
             while($row = mysqli_fetch_assoc($results)){
-                echo '<div style="margin-right:auto; margin-left:auto; margin-top:20px; justify-content:center; display:flex; width:fit-content; border: 1px solid black; background-color:grey" width:50%;><p style="margin-right:20px;">'.$row["username"].'</p><a style="margin-right:20px;" href="recipie.php?rec_id='.$row['id'].'">'.$row["title"].'</a><p>'.$row["calories"].'</p></div>';
+               // echo '<div style="margin-right:auto; margin-left:auto; margin-top:20px; justify-content:center; display:flex; width:fit-content; border: 1px solid black; background-color:grey" width:50%;><p style="margin-right:20px;">'.$row["username"].'</p><a style="margin-right:20px;" href="recipie.php?rec_id='.$row['id'].'">'.$row["title"].'</a><p>'.$row["calories"].'</p></div>';
+
+                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;"><tr><th>user</th><th>recipe</th><th>calories</th></tr><tr><td>'.$row["username"].'</td><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
                   }
 
             echo "<a href='home.php'>Go To Search</a>";
