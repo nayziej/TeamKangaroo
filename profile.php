@@ -1,4 +1,7 @@
-?php include 'webConfig.php';?>
+<?php include 'webConfig.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="home.css?v=<?php echo time(); ?>" />
 </head>
 
 <body>
@@ -29,47 +32,51 @@
             </form>   
         </div>
     </div>
-    <h1><?= htmlspecialchars('username') ?>'s Profile</h1>
-    <h2>Recipes:</h2>
-    <ul>
-        <?php while ($recipe = mysqli_fetch_assoc($recipes_result)) { ?>
-            <li><?= htmlspecialchars($recipe['name']) ?></li>
-        <?php } ?>
-    </ul>
- </body>
-<?php
+    
+    <?php
 
+    if(isset($_GET['user'])){
+        echo "<h1 class='p-username'>".$_GET['user']."'s Profile</h1>";
+        echo "<h2>Recipes:</h2>";
 
-// Get the 'user' parameter from the URL
-$user = isset($_GET['user']) ? $_GET['user'] : '';
+        $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
+        if (!$conn){
+            die("Connection failed: ". mysqli_connect_error());
+        }
 
-$conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+        $sql = "SELECT r.id, r.title, r.calories FROM recipie as r INNER JOIN user as u ON r.user_id = u.id WHERE u.username = '".$_GET['user']."'";
+        $results = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($results) > 0){
+            while($row = mysqli_fetch_assoc($results)){
+                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;"><tr><th>recipe</th><th>calories</th></tr><tr><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
+            }
+        }else{
+            echo "<p>User does not have any recipes yet.</p>";
+        }
+    }elseif(isset($_SESSION['username'])){
+        echo"<h1 class='p-username1'>".$_SESSION['username']."'s Profile</h1>";
+        echo "<h2>Recipes:</h2>";
 
-// Query to fetch user details (assuming 'Users' table has 'username' and 'user_id' columns)
-$user_sql = "SELECT user_id, username FROM user WHERE username = ?";
-$stmt = mysqli_prepare($conn, $user_sql);
-mysqli_stmt_bind_param($stmt, "s", $user);
-mysqli_stmt_execute($stmt);
-$user_result = mysqli_stmt_get_result($stmt);
+        $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
+        if(!$conn){
+            die("Connection failed: ".mysqli_connect_error());
+        }
 
-if ($user_row = mysqli_fetch_assoc($user_result)) {
-    $userId = $user_row['user_id'];
-    $username = $user_row['username'];
-
-    // Now, fetch the user's recipes (assuming 'Recipes' table has 'name' and 'user_id' columns)
-    $recipes_sql = "SELECT name FROM Recipes WHERE user_id = ?";
-    $stmt = mysqli_prepare($conn, $recipes_sql);
-    mysqli_stmt_bind_param($stmt, "i", $userId);
-    mysqli_stmt_execute($stmt);
-    $recipes_result = mysqli_stmt_get_result($stmt);
-} else {
-    die("User not found.");
-}
+        $sql = "SELECT r.id, r.title, r.calories FROM recipie as r INNER JOIN user as uON r.user_id = u.id WHERE u.username = '".$_SESSION['username']. "'";
+        $results = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($results) > 0){
+            while($row = mysqli_fetch_assoc($results)){
+             echo ' <table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;"><tr><th>user</th><th>recipe</th><th>calories</th></tr><tr><td>'.$row["username"].'</td><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
+            }
+        }else{
+            echo "<p>User does not have any recipes yet.";
+        }
+    }else{
+        echo "<p>Please login or signup to view profile.</p>";
+    }
 ?>
+</body>
 </html>
 <?php
-mysqli_close($conn);
+
 ?>
