@@ -77,6 +77,7 @@
         <div class="navbar">
             <a href="home.php">Home</a>
             <a href="publishers.php">Publishers</a>
+            <a href="discussion.php">Discussions</a>
             <a href="recipie.php">Recipes</a>
             <a href="profile.php">Profile</a>
         </div>
