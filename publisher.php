@@ -16,6 +16,7 @@
             <div class="navbar">
                 <a href="home.php">Home</a>
                 <a href="publisher.php">Publishers</a>
+                <a href="discussion.php">Discussions</a>
                 <a href="recipie.php">Recipies</a>
                 <a href="profile.php">Profile</a>
             </div>
