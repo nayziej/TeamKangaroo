@@ -1,4 +1,35 @@
-<?php include 'webConfig.php'; ?>
+<?php
+session_start(); // Start the session at the very beginning
+
+include 'webConfig.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];  // Assuming password is plain text (consider hashing)
+
+    $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $sql = "SELECT id, username FROM user  WHERE username = ? AND password = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($user = mysqli_fetch_assoc($result)) {
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        header("Location: home.php"); // Redirect to home page after login
+        exit;
+    } else {
+        $error = "Invalid username or password";
+    }
+
+    mysqli_close($conn);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,17 +103,22 @@
 
 <body>
     <div class="navbar-wrapper">
-        <a href="home.php" class="logo">Title</a>
+        <a href="home.php" class="logo">reciPIES</a>
 
         <div class="navbar">
             <a href="home.php">Home</a>
             <a href="publishers.php">Publishers</a>
+            <a href="discussion.php">Discussions</a>
             <a href="recipie.php">Recipes</a>
             <a href="profile.php">Profile</a>
         </div>
         <div class="ls-buttons">
-            <button  href="login.php" class="btn">Log In</button>
-            <button href="signup.php" class="btn">Sign Up</button>
+             <form  style="float:left;"action="login.php">
+             <button class="btn" type="submit" href="login.php">Log In</button>
+             </form>
+             <form  style="float: left;"action="signup.php">
+             <button class="btn" type="submit" href="signup.php">Sign Up</button>
+             </form>
         </div>
     </div>
 
@@ -100,7 +136,7 @@
                     $username = $_POST['username'];
                     $password = $_POST['password'];
 
-                    $conn = mysqli_connect($servername, $username, $password, $dbname);
+                    $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
                     if (!$conn) {
                         die("Connection failed: " . mysqli_connect_error());
                     }

@@ -1,4 +1,6 @@
-<?php include 'webConfig.php'; ?>
+<?php
+include 'webConfig.php';?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,18 +58,24 @@
 </head>
 
 <body>
- <div class="navbar-wrapper">         <a href="home.php" class="logo">Title</a>
+ <div class="navbar-wrapper">         
+<a href="home.php" class="logo">reciPIES</a>
  
          <div class="navbar">
              <a href="home.php">Home</a>
-             <a href="">Publishers</a>
+             <a href="publisher.php">Publishers</a>
+             <a href="discussion.php">Discussions</a>
              <a href="recipie.php">Recipes</a>
              <a href="profile.php">Profile</a>
 
          </div>
          <div class="ls-buttons">
-             <button class="btn" type="button" href="login.php">Log In</button>
-             <button class="btn" type="button" href="signup.php">Sign Up</button>
+            <form  style="float:left;"action="login.php">
+            <button class="btn" type="submit" href="login.php">Log In</button>
+            </form>
+            <form  style="float: left;"action="signup.php">
+            <button class="btn" type="submit" href="signup.php">Sign Up</button>
+            </form>  
          </div>
     </div>
     <div class="signup-container">
@@ -80,25 +88,37 @@
                 <button type="submit" name="signup">Sign Up</button>
             </form>
             <?php
-            if (isset($_POST['signup'])) {
+            if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['signup'])) {
                 $name = $_POST['name'];
                 $username = $_POST['username'];
                 $password = $_POST['password'];
 
-                $conn = mysqli_connect($servername, $username, $password, $dbname);
+                $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
+                 $check_sql = "SELECT username FROM user WHERE username = ?";
+                 $check_stmt = mysqli_prepare($conn, $check_sql);
+                 mysqli_stmt_bind_param($check_stmt, "s", $username);
+                 mysqli_stmt_execute($check_stmt);
+                 mysqli_stmt_store_result($check_stmt);
+    
+                 if (mysqli_stmt_num_rows($check_stmt) > 0) {
+                     $error = "Username already taken. Please choose a different one.";
+                      } else {
 
                 $sql = "INSERT INTO user (name, username, password) VALUES ('$name', '$username', '$password')";
                 if (mysqli_query($conn, $sql)) {
-                    echo "<p style='color: green;'>User created successfully.</p>";
+                    echo "<p style='color: green;'>User created successfully. Navigate to Login Page to start the fun!</p>";
                 } else {
                     echo "<p style='color: red;'>Error: " . mysqli_error($conn) . "</p>";
                 }
-
+                
+                }
+                
                 mysqli_close($conn);
             }
+
             ?>
         </div>
     </div>

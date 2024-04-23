@@ -5,19 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <link rel="stylesheet" href="home.css" />
 </head>
 
 <body>
     <div class=navbar-wrapper>
-        <a href="home.php" class="logo">Title</a>
+        <a href="home.php" class="logo">reciPIES</a>
 
         <div class="navbar">
             <a href="home.php">Home</a>
             <a href="publisher.php">Publishers</a>
             <a href="discussion.php">Discussions</a>
-            <a href="recipie.php">Recipies</a>
+            <a href="recipie.php">Recipes</a>
             <a href="profile.php">Profile</a>
         </div>
         <div class="ls-buttons">
@@ -29,12 +29,17 @@
             </form>   
         </div>
     </div>
+    <p class="welcome-message">Welcome to reciPIES, your go-to destination for culinary inspiration!
+     Whether you're searching for a comforting classic or a daring new creation,
+     our user-friendly platform makes it easy to find the perfect recipe.
+ Join our vibrant community by sharing your own culinary creations and exploring a world of flavor. 
+Start your journey with reciPIES today!</p>
     <div class="search-bar">
         <form name=data-select method=post>
             <input name="searchData" list="dataOptions">
             <datalist id="dataOptions">
                 <option value="Publishers">
-                <option value="Recipies">
+                <option value="Recipes">
                 <option value="Ingredients">
             </datalist>
             <input name="phrase" class="search-box"type="text">
@@ -57,7 +62,7 @@
         }
 
 
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
         if(!$conn){
             die("Connection Failed: " . mysqli_connect_error());
         }

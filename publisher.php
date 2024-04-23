@@ -11,12 +11,13 @@
 
     <body>
         <div class=navbar-wrapper>
-             <a href="home.php" class="logo">Title</a>
+             <a href="home.php" class="logo">reciPIES</a>
  
             <div class="navbar">
                 <a href="home.php">Home</a>
                 <a href="publisher.php">Publishers</a>
-                <a href="recipie.php">Recipies</a>
+                <a href="discussion.php">Discussions</a>
+                <a href="recipie.php">Recipes</a>
                 <a href="profile.php">Profile</a>
             </div>
             <div class="ls-buttons">
@@ -29,7 +30,7 @@
              </div>
          </div>
 <?php
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
@@ -37,13 +38,15 @@ if (!$conn) {
 $sql = "SELECT name, username FROM user";
 $result = mysqli_query($conn, $sql);
 
-echo "<div class='publisher-list'>";
-while($row = mysqli_fetch_assoc($result)) {
-    echo "<div class='publisher'>";
-    echo "<p>" . $row["name"] . "</p>";
-    echo "<a href='profile.php?user=" . $row["username"] . "'>" . $row["username"] . "</a>";
-    echo "</div>";
-}
-echo "</div>";
+
+    echo "<table class='publisher-list'>";
+    echo "<tr><th>Name</th><th>Profile</th></tr>"; // Table headers
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>" . htmlspecialchars($row["name"]) . "</td>"; // Display name
+        echo "<td><a href='profile.php?user=" . urlencode($row["username"]) . "'>" . htmlspecialchars($row["username"]) . "</a></td>"; // Display link to profile
+        echo "</tr>";
+    }
+    echo "</table>";
 mysqli_close($conn);
 ?>

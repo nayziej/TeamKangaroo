@@ -5,18 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="home.css" />
 </head>
 
 <body>
     <div class=navbar-wrapper>
-        <a href="home.php" class="logo">Title</a>
+        <a href="home.php" class="logo">reciPIES</a>
 
         <div class="navbar">
             <a href="home.php">Home</a>
             <a href="publisher.php">Publishers</a>
-            <a href="recipie.php">Recipies</a>
+            <a href="discussion.php">Discussions</a>
+             <a href="recipie.php">Recipes</a>
             <a href="profile.php">Profile</a>
         </div>
         <div class="ls-buttons">
@@ -28,7 +29,7 @@
             </form>   
         </div>
     </div>
-    <h1><?= htmlspecialchars($username) ?>'s Profile</h1>
+    <h1><?= htmlspecialchars('username') ?>'s Profile</h1>
     <h2>Recipes:</h2>
     <ul>
         <?php while ($recipe = mysqli_fetch_assoc($recipes_result)) { ?>
@@ -42,7 +43,7 @@
 // Get the 'user' parameter from the URL
 $user = isset($_GET['user']) ? $_GET['user'] : '';
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
