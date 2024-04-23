@@ -17,8 +17,8 @@
             <a href="home.php">Home</a>
             <a href="publisher.php">Publishers</a>
             <a href="discussion.php">Discussions</a>
-            <a href="recipie.php">Recipes</a>
-            <a href="">Profile</a>
+            <a href="recipie.php">Recipies</a>
+            <a href="profile.php">Profile</a>
         </div>
         <div class="ls-buttons">
             <form style="float:left;" action="login.php">

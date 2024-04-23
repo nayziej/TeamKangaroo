@@ -1,4 +1,4 @@
-<?php include 'webConfig.php';?>
+?php include 'webConfig.php';?>
 <!DOCTYPE html>
 <html lang="en">
 

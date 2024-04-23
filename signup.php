@@ -75,7 +75,7 @@ include 'webConfig.php';?>
             </form>
             <form  style="float: left;"action="signup.php">
             <button class="btn" type="submit" href="signup.php">Sign Up</button>
-            </form>  
+            </form> 
          </div>
     </div>
     <div class="signup-container">

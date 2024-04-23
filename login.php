@@ -113,6 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="profile.php">Profile</a>
         </div>
         <div class="ls-buttons">
+
              <form  style="float:left;"action="login.php">
              <button class="btn" type="submit" href="login.php">Log In</button>
              </form>
