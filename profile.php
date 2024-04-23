@@ -62,7 +62,7 @@ session_start();
             die("Connection failed: ".mysqli_connect_error());
         }
 
-        $sql = "SELECT r.id, r.title, r.calories FROM recipie as r INNER JOIN user as uON r.user_id = u.id WHERE u.username = '".$_SESSION['username']. "'";
+        $sql = "SELECT r.id, r.title, r.calories FROM recipie as r INNER JOIN user as u     ON r.user_id = u.id WHERE u.username = '".$_SESSION['username']."'";        
         $results = mysqli_query($conn, $sql);
         if(mysqli_num_rows($results) > 0){
             while($row = mysqli_fetch_assoc($results)){
