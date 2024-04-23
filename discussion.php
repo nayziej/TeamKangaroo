@@ -11,13 +11,13 @@
 
 <body>
     <div class=navbar-wrapper>
-        <a href="home.php" class="logo">reciPIES</a>
+      <img src="images/recipies1.png" alt="reciPIES Logo" style=style= height: 400px; width: 400px>
  
         <div class="navbar">
             <a href="home.php">Home</a>
             <a href="publisher.php">Publishers</a>
             <a href="discussion.php">Discussions</a>
-            <a href="recipie.php">Recipies</a>
+            <a href="recipie.php">Recipes</a>
             <a href="profile.php">Profile</a>
         </div>
         <div class="ls-buttons">

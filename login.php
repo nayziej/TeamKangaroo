@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="navbar-wrapper">
-        <a href="home.php" class="logo">reciPIES</a>
+        <img src="images/recipies1.png" alt="reciPIES Logo" style=style= height: 400px; width: 400px>
 
         <div class="navbar">
             <a href="home.php">Home</a>
