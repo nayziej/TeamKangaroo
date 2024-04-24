@@ -61,7 +61,7 @@
             while($row = mysqli_fetch_assoc($results)){
                // echo '<div style="margin-right:auto; margin-left:auto; margin-top:20px; justify-content:center; display:flex; width:fit-content; border: 1px solid black; background-color:grey" width:50%;><p style="margin-right:20px;">'.$row["username"].'</p><a style="margin-right:20px;" href="recipie.php?rec_id='.$row['id'].'">'.$row["title"].'</a><p>'.$row["calories"].'</p></div>';
 
-                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;"><tr><th>user</th><th>recipe</th><th>calories</th></tr><tr><td>'.$row["username"].'</td><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
+                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:gainsboro;"><tr><th style="background-color: #4CAF50; color:white;">user</th><th style="background-color: #4CAF50; color:white;">recipe</th><th style="background-color: #4CAF50; color:white;">calories</th></tr><tr><td>'.$row["username"].'</td><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
                   }
           
         }else{
