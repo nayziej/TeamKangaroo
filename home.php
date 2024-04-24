@@ -41,7 +41,7 @@ Start your journey with reciPIES today!</p>
             <datalist id="dataOptions">
                 <option value="Publishers">
                 <option value="Recipes">
-                <option value="Ingredients">
+                
             </datalist>
             <input name="phrase" class="search-box"type="text">
             <input name="submit" class="go" type="submit">
@@ -84,7 +84,7 @@ Start your journey with reciPIES today!</p>
             }else{
                 echo "No results";
             }
-        }else if($namedb == 'Recipies'){
+        }else if($namedb == 'Recipes'){
             if($phrase == ''){
                 $sql = "SELECT u.username, r.title, r.calories, r.id FROM user as u inner join recipie as r WHERE u.id = r.user_id";
             }else{
@@ -93,7 +93,7 @@ Start your journey with reciPIES today!</p>
 
             $results = mysqli_query($conn, $sql);
             if(mysqli_num_rows($results) > 0){
-                echo '<p style="display:flex; margin-top:50px; justify-content:center;">Recipies:</p>';
+                echo '<p style="display:flex; margin-top:50px; justify-content:center;">Recipes:</p>';
 
                 while($row = mysqli_fetch_assoc($results)){
                     echo '<div style="margin-right:auto; margin-left:auto; margin-top:2    0px; justify-content:center; display:flex; width:fit-content; border: 1px solid black;     background-color:grey" width:50%;><p style="margin-right:20px;">'.$row["username"].'</p><a style="margin-right:20px;" href="recipie.php?rec_id='.$row['id'].'">'.$row["title"].'</a><p>'.$row["calories"].'</p></div>';

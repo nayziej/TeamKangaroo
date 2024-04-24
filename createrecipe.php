@@ -32,14 +32,14 @@ session_start();?>
         </div>
     </div>
 <?php
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['id'])) {
     // User is not logged in. Display a message instead of the form
     $message = "You must be logged in to create a recipe. <a href='login.php'>Log in here</a>";
 } else {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     $directions = $_POST['directions'];
-    $userId = $_SESSION['user_id']; // Assuming you store user_id in session on login
+    $userId = $_SESSION['id']; // Assuming you store user_id in session on login
 
     $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
     if (!$conn) {
