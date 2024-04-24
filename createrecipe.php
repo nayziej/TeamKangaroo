@@ -31,6 +31,9 @@ session_start();?>
             </form>
         </div>
     </div>
+        <div
+            <h2>Create Recipe</h2>
+        </div>
 <?php
 if (!isset($_SESSION['id'])) {
     // User is not logged in. Display a message instead of the form
