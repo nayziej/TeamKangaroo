@@ -29,9 +29,9 @@ session_start();
             </form>
             <form  style="float: left;"action="signup.php">
             <button class="btn" type="submit" href="signup.php">Sign Up</button>
-            </form>   
+            </form>
         </div>
-    </div>  
+    </div>
     <?php
 
     if(isset($_GET['user'])){
@@ -60,19 +60,14 @@ session_start();
         if(!$conn){
             die("Connection failed: ".mysqli_connect_error());
         }
-}
-        $sql = "SELECT r.id, r.title, r.calories FROM recipie as r INNER JOIN user as u     ON r.user_id = u.id WHERE u.username = '".$_SESSION['username']."'";        
+
+        $sql = "SELECT r.id, r.title, r.calories FROM recipie as r INNER JOIN user as u     ON r.user_id = u.id WHERE u.username = '".$_SESSION['username']."'";
         $results = mysqli_query($conn, $sql);
         if(mysqli_num_rows($results) > 0){
             while($row = mysqli_fetch_assoc($results)){
              echo ' <table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;"><tr><th>user</th><th>recipe</th><th>calories</th></tr><tr><td>'.'</td><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
-            echo "<p><strong>" . htmlspecialchars($row['title']) . "</strong> - " . $row['calories'] . " calories</p>";
             }
-            if ($_SESSION['username'] === $username) {
-                echo "<a href='editrecipe.php?rec_id=" . $row['id'] . "'>Edit</a> | ";
-                echo "<a href='deleterecipe.php?rec_id=" . $row['id'] . "'>Delete</a>"; 
-             
-           }else{
+        }else{
             echo "<p>User does not have any recipes yet.";
         }
     }else{
@@ -86,4 +81,3 @@ session_start();
 </html>
 <?php
 
-?>
