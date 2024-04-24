@@ -83,3 +83,32 @@
 .p-username1{
     background-color: blue;
 }
+
+
+.disc{
+    display: inline: block;
+    background-color: gainsboro;
+    width: fit-content;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.new-post{
+    display: block;
+    background-color: gainsboro;
+    border: 1px solid black;
+    width: fit-content;
+}
+
+.new-post div{
+    margin-bottom:10px;
+}
+
+.np{
+    display: inline-block;
+}
+
+
