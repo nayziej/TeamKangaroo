@@ -1,4 +1,6 @@
-<?php include 'webConfig.php';?>
+<?php include 'webConfig.php';
+ session_start();?>
+
  <!DOCTYPE html>
 <html lang="en">
 
@@ -33,6 +35,7 @@
     <?php 
         if(isset($_GET['rec_id'])){
             $recipie = $_GET['rec_id'];
+            $userId = $_SESSION['id'];
 
             $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
             if(!$conn){
@@ -54,14 +57,13 @@
 
             $results = mysqli_query($conn, $sql);
             if(mysqli_num_rows($results) > 0){
-                echo '<p style="display:flex; margin-top:50px; justify-content:center;">Recipies:</p>';
+                echo '<p style="display:flex; margin-top:50px; justify-content:center;">Recipes:</p>';
             while($row = mysqli_fetch_assoc($results)){
                // echo '<div style="margin-right:auto; margin-left:auto; margin-top:20px; justify-content:center; display:flex; width:fit-content; border: 1px solid black; background-color:grey" width:50%;><p style="margin-right:20px;">'.$row["username"].'</p><a style="margin-right:20px;" href="recipie.php?rec_id='.$row['id'].'">'.$row["title"].'</a><p>'.$row["calories"].'</p></div>';
 
                 echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;"><tr><th>user</th><th>recipe</th><th>calories</th></tr><tr><td>'.$row["username"].'</td><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
                   }
-
-            echo "<a href='home.php'>Go To Search</a>";
+          
         }else{
             echo "No results.";
         }
@@ -69,9 +71,13 @@
         
 
 ?>
-
+    <div>
+            <a href='createrecipe.php'>Create New Recipe</a>
+    </div>
+    <div>
+            <a href='home.php'>Go To Search</a>
+    </div>
 
 </body>
-</html>
-   
+</html>   
 
