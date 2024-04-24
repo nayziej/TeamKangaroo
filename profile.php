@@ -71,17 +71,13 @@ session_start();
         $sql = "SELECT r.id, r.title, r.calories FROM recipie as r INNER JOIN user as u     ON r.user_id = u.id WHERE u.username = '".$_SESSION['username']."'";
         $results = mysqli_query($conn, $sql);
         if(mysqli_num_rows($results) > 0){
-                       echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;">';
-            echo '<tr><th>Recipe</th><th>Calories</th><th>Actions</th></tr>';
-            while($row = mysqli_fetch_assoc($results)){
-<<<<<<< HEAD
-                echo '<tr><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td>';
-                echo '<td>'.$row['calories'].'</td>';
-                echo '<td><a href="editrecipe.php?rec_id='.$row["id"].'">Edit</a> | <a href="deleterecipe.php?rec_id='.$row["id"].'">Delete</a></td></tr>';
-=======
-             echo ' <table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:gainsboro;"><tr><th style="background-color: #4CAF50; color:white;">recipe</th><th style="background-color: #4CAF50; color:white;">calories</th></tr><tr><td>'.'</td><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
->>>>>>> 3f19e782a0dbce0aba39dc43ffd8f7d2fee79fed
-            }
+               echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:gainsboro;">';
+        echo '<tr style="background-color: #4CAF50; color:white;"><th>Recipe</th><th>Calories</th><th>Actions</th></tr>';
+        while($row = mysqli_fetch_assoc($results)){
+            echo '<tr><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td>';
+            echo '<td>'.$row['calories'].'</td>';
+            echo '<td><a href="editrecipe.php?rec_id='.$row["id"].'">Edit</a> | <a href="deleterecipe.php?rec_id='.$row["id"].'">Delete</a></td></tr>';
+        }
             echo '</table>';
             
         }else{
