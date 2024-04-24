@@ -98,7 +98,7 @@ session_start();
             while($row = mysqli_fetch_assoc($results)){
                // echo '<div style="margin-right:auto; margin-left:auto; margin-top:20px; justify-content:center; display:flex; width:fit-content; border: 1px solid black; background-color:grey" width:50%;><p style="margin-right:20px;">'.$row["username"].'</p><a style="margin-right:20px;" href="recipie.php?rec_id='.$row['id'].'">'.$row["title"].'</a><p>'.$row["calories"].'</p></div>';
 
-                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:gainsboro;"><tr style="background-color: green;"><th>user</th><th>discussion</th></tr><tr><td>'.$row["username"].'</td><td><a href="discussion.php?dis_id='.$row["id"].'">'.$row["title"].'</a></td></tr></table>';
+                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:gainsboro;"><tr><th style="background-color: #4CAF50; color:white;">user</th><th style="background-color: #4CAF50; color:white;">discussion</th></tr><tr><td>'.$row["username"].'</td><td><a href="discussion.php?dis_id='.$row["id"].'">'.$row["title"].'</a></td></tr></table>';
                   }
 
             echo "<a href='home.php'>Go To Search</a>";

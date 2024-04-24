@@ -47,7 +47,7 @@ session_start();
         $results = mysqli_query($conn, $sql);
         if(mysqli_num_rows($results) > 0){
             while($row = mysqli_fetch_assoc($results)){
-                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;"><tr><th>recipe</th><th>calories</th></tr><tr><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
+                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:gainsboro;"><tr><th style="background-color: #4CAF50; color:white;">recipe</th><th style="background-color: #4CAF50; color: white;">calories</th></tr><tr><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
             }
         }else{
             echo "<p>User does not have any recipes yet.</p>";
@@ -65,7 +65,7 @@ session_start();
         $results = mysqli_query($conn, $sql);
         if(mysqli_num_rows($results) > 0){
             while($row = mysqli_fetch_assoc($results)){
-             echo ' <table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;"><tr><th>user</th><th>recipe</th><th>calories</th></tr><tr><td>'.'</td><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
+             echo ' <table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:gainsboro;"><tr><th style="background-color: #4CAF50; color:white;">recipe</th><th style="background-color: #4CAF50; color:white;">calories</th></tr><tr><td>'.'</td><td><a href="recipie.php?rec_id='.$row["id"].'">'.$row["title"].'</a></td><td>'.$row['calories'].'</td></tr></table>';
             }
         }else{
             echo "<p>User does not have any recipes yet.";
