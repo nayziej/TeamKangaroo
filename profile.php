@@ -31,6 +31,7 @@ session_start();
             <button class="btn" type="submit" href="signup.php">Sign Up</button>
             </form>
         </div>
+        </div>
         <?php if (isset($_SESSION['message'])): ?>
         <p style="color: green;"><?= $_SESSION['message']; ?></p>
         <?php unset($_SESSION['message']); endif; ?>
@@ -38,7 +39,7 @@ session_start();
         <?php if (isset($_SESSION['error'])): ?>
         <p style="color: red;"><?= $_SESSION['error']; ?></p>
         <?php unset($_SESSION['error']); endif; ?>
-    </div>
+    
     <?php
 
     if(isset($_GET['user'])){
