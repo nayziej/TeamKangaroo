@@ -111,4 +111,12 @@
     display: inline-block;
 }
 
+.edit-post{
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    background-color: gainsboro;
+    width: fit-content;
+    border: 1px solid black;
 
+}
