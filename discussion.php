@@ -54,13 +54,14 @@ session_start();
             if(isset($_POST['ptitle'])){
                  $sql = "INSERT INTO post (title, user_id, content, disc_id) VALUES ('".$_POST['ptitle']."',".$_SESSION['id'].",'".$_POST['pcontent']."',".$discussion.")";
                 mysqli_query($conn, $sql);
-                $sql = "";
+                $sql = "INSERT IGNORE INTO user_discussion (user_id, discussion_id, owner) VALUES (".$_SESSION['id'].",".$discussion.",0)";
+                mysqli_query($conn, $sql);
                 header("Location: discussion.php?dis_id=".$discussion."");
                 exit;
             }
             }
              echo"<h2 style='display:flex; justify-content:center;'>Discussion Thread:</h2>";
-
+            
 
             $sql = "SELECT p.title, u.username, p.content, p.user_id, p.id FROM post as p INNER JOIN user as u ON p.user_id = u.id WHERE disc_id = ".$discussion."";
             $res = mysqli_query($conn, $sql);
@@ -68,7 +69,7 @@ session_start();
                 while($r = mysqli_fetch_assoc($res)){
                     if(isset($_SESSION['id'])){
                     if($_SESSION['id'] == $r['user_id']){
-                        echo"<div class='disc'><p>".$r['title']."</p><p>".$r['username']."</p><p>".$r['content']."</p> <a href=postedit.php?dis_id=".$discussion."&pid=".$r['id'].">Edit</a></div>";
+                        echo"<div class='disc'><p>".$r['title']."</p><p>".$r['username']."</p><p>".$r['content']."</p> <a href=postedit.php?dis_id=".$discussion."&pid=".$r['id'].">Edit</a><a href='postdelete.php?dis_id=".$discussion."&pid=".$r['id']."'>Delete</a></div>";
                     }else{
                          echo "<div class='disc'><p>".$r['title']."</p><p>".$r['username']."</p><p>".$r['content']."</p></div>";
                         }
@@ -84,6 +85,11 @@ session_start();
             }
 
             echo"<h1>Discover</h1>";
+
+            if(isset($_SESSION['username'])){
+               echo"<p>Create a Discussion</p>";
+            echo "<div class='new-post'><form class='np' name='make-post' method=post><div><label for='dtitle'>Title</label><input name='dtitle' type='text'></div><div><input name='submit' type='submit'></div></form></div>";           
+}
             $sql = "SELECT u.username, d.title, d.id FROM user as u INNER JOIN user_discussion as ud ON u.id = ud.user_id INNER JOIN discussion as d ON ud.discussion_id = d.id where ud.owner = 1";
 
             $results = mysqli_query($conn, $sql);
@@ -99,6 +105,22 @@ session_start();
         }else{
             echo "No results.";
         }
+
+            if(isset($_POST['dtitle'])){
+                $sql = "INSERT INTO discussion (title) VALUES ('".$_POST['dtitle']."')";
+
+                mysqli_query($conn, $sql);
+                $sql = "SELECT id FROM discussion WHERE title = '".$_POST['dtitle']."'";
+                $results = mysqli_query($conn, $sql);
+                $r = mysqli_fetch_assoc($results);
+                $discussion = $r['id'];
+                
+                $sql = "INSERT INTO user_discussion (user_id, discussion_id, owner) VALUES ('".$_SESSION['id']."','".$discussion."', 1)";
+                mysqli_query($conn, $sql);
+
+                header("Location: discussion.php");
+                exit;
+            }
         }
         
 
