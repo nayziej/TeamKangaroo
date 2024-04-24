@@ -1,4 +1,6 @@
-<?php include 'webConfig.php';?>
+<?php include 'webConfig.php';
+session_start();
+;?>
  <!DOCTYPE html>
 <html lang="en">
 
@@ -42,16 +44,28 @@
              $sql = "SELECT u.username, d.title FROM user as u INNER JOIN user_discussion as ud ON u.id = ud.user_id INNER JOIN discussion as d ON ud.discussion_id = d.id where ud.owner = 1 AND d.id = ".$discussion."";
              $results = mysqli_query($conn, $sql);
              $row = mysqli_fetch_assoc($results);
-             echo "<h1> ".$row['title']."</h1><p style='bottom-margin:50px;'> Made by: ".$row['username']."</p>";
+             echo "<h1> ".$row['title']."</h1><p style='bottom-margin:50px;'> Discussion Author: ".$row['username']."</p>";
+            echo"<h2 style='display:flex; justify-content:center;'>Discussion Thread:</h2>";
             
-            
-            $sql = "SELECT title, user_id, content FROM post WHERE disc_id = ".$discussion."";
+            $sql = "SELECT p.title, u.username, p.content FROM post as p INNER JOIN user as u ON p.user_id = u.id WHERE disc_id = ".$discussion."";
             $res = mysqli_query($conn, $sql);
             if(mysqli_num_rows($res) > 0){
                 while($r = mysqli_fetch_assoc($res)){
-                    echo "<div><p>".$r['title']."</p><p>".$r['user_id']."</p><p>".$r['content']."</p></div>";
+                    echo "<div class='disc'><p>".$r['title']."</p><p>".$r['username']."</p><p>".$r['content']."</p></div>";
                 }
-            } 
+            }
+            if(isset($_SESSION['username'])){
+            echo"<p>Create a Post</p>";
+            echo "<div class='new-post'><form class='np' name='make-post' method=post><div><label for='ptitle'>Title</label><input name='ptitle' type='text'></div><div><label for='pcontent'>Body</label><textarea name='pcontent' rows=4 cols=20></textarea></div><div><input name='submit' type='submit'></div></form></div>"; 
+
+            if(isset($_POST['ptitle'])){
+                $sql = "INSERT INTO post (title, user_id, content, disc_id) VALUES ('".$_POST['ptitle']."',".$_SESSION['id'].",'".$_POST['pcontent']."',".$discussion.")";
+                mysqli_query($conn, $sql);
+                $sql = "";
+                header("Location: discussion.php?dis_id=".$discussion."");
+                exit;
+            }
+            }
         }else{
             $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
             if(!$conn){
@@ -67,7 +81,7 @@
             while($row = mysqli_fetch_assoc($results)){
                // echo '<div style="margin-right:auto; margin-left:auto; margin-top:20px; justify-content:center; display:flex; width:fit-content; border: 1px solid black; background-color:grey" width:50%;><p style="margin-right:20px;">'.$row["username"].'</p><a style="margin-right:20px;" href="recipie.php?rec_id='.$row['id'].'">'.$row["title"].'</a><p>'.$row["calories"].'</p></div>';
 
-                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:grey;"><tr><th>user</th><th>discussion</th></tr><tr><td>'.$row["username"].'</td><td><a href="discussion.php?dis_id='.$row["id"].'">'.$row["title"].'</a></td></tr></table>';
+                echo '<table style="margin-right:auto; margin-left:auto; margin-top:20px; border: 1px solid black; background-color:gainsboro;"><tr style="background-color: green;"><th>user</th><th>discussion</th></tr><tr><td>'.$row["username"].'</td><td><a href="discussion.php?dis_id='.$row["id"].'">'.$row["title"].'</a></td></tr></table>';
                   }
 
             echo "<a href='home.php'>Go To Search</a>";
